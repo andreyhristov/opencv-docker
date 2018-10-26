@@ -1,0 +1,30 @@
+FROM resin/aarch64-ubuntu:xenial as base
+
+RUN [ "cross-build-start" ]
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	wget file \
+	cmake \
+	build-essential \
+	autoconf \
+	less \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/opencv/opencv/archive/3.4.3.tar.gz -O opencv3.4.3.tar.gz \
+	&& tar zxvf opencv3.4.3.tar.gz \
+	&& mkdir opencv-build \ 
+	&& cd opencv-build \
+	&& cmake ../opencv-3.4.3 \
+	&& make -j2 \
+	&& make install
+
+RUN [ "cross-build-end" ]
+
+FROM resin/aarch64-ubuntu:xenial
+
+COPY --from=base /usr/local/lib/libopencv* /usr/local/lib/
+COPY --from=base /usr/local/share/OpenCV /usr/local/share/
+COPY --from=base /usr/local/bin/opencv* /usr/local/bin/
+COPY --from=base /usr/local/include/opencv /usr/local/include/
