@@ -25,6 +25,7 @@ RUN [ "cross-build-end" ]
 FROM resin/aarch64-ubuntu:xenial
 
 COPY --from=base /usr/local/bin/opencv* /usr/local/bin/
-COPY --from=base /usr/local/lib/libopencv* /usr/local/lib/
-COPY --from=base /usr/local/share/OpenCV /usr/local/share/
+#installs libs but also pkgconfig/opencv.pc
+COPY --from=base /usr/local/lib/ /usr/local/lib/
+COPY --from=base /usr/local/share/ /usr/local/share/
 COPY --from=base /usr/local/include/ /usr/local/include/
