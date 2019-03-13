@@ -1,4 +1,4 @@
-OpenCV Builder Container for AARCH64 (ARM64)
+OpenCV Builder Container for AARCH64 (arm64v8)
 ==========
 
 To build a specific version, for example 3.3.1 execute:
