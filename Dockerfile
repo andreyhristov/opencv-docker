@@ -28,7 +28,8 @@ RUN wget https://github.com/opencv/opencv/archive/$OPENCV_VERSION.tar.gz -O open
 
 RUN [ "cross-build-end" ]
 
-FROM resin/aarch64-ubuntu:xenial
+
+FROM balenalib/generic-aarch64-ubuntu:bionic-run
 
 COPY --from=base /usr/local/bin/opencv* /usr/local/bin/
 #installs libs but also pkgconfig/opencv.pc
