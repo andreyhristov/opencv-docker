@@ -1,6 +1,6 @@
 # docker build --build-arg OPENCV_VERSION=3.3.1 -t andreyhristov/opencv:3.3.1-aarch64 --target=base .
 
-FROM resin/aarch64-ubuntu:xenial as base
+FROM balenalib/generic-aarch64-ubuntu:bionic-run as base
 ARG OPENCV_VERSION=3.3.1
 
 RUN [ "cross-build-start" ]
